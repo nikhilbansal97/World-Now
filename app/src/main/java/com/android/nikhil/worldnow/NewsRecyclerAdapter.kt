@@ -18,10 +18,12 @@ class NewsRecyclerAdapter(var context: Context,var listener: NewsItemClickListen
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         if (list != null) {
             val currentNews = list!![position]
-            holder.textViewTitle.text = currentNews.webTitle
-            holder.textViewSection.text = currentNews.sectionName
-            holder.textViewDate.text = currentNews.webPublicationDate
-            holder.view.setOnClickListener {_ -> listener.onNewsClicked(currentNews.webUrl)}
+            holder.apply {
+                textViewTitle.text = currentNews.webTitle
+                textViewSection.text = currentNews.sectionName
+                textViewDate.text = currentNews.webPublicationDate
+                view.setOnClickListener { _ -> listener.onNewsClicked(currentNews.webUrl) }
+            }
         }
     }
 
