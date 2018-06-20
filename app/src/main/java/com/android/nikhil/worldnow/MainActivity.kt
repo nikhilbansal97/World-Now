@@ -35,13 +35,14 @@ class MainActivity : AppCompatActivity(), NewsItemClickListener {
             run {
                 if (list != null) adapter.swapNewsData(list)
                 else Log.d(TAG, "Updated list is null")
-        } })
+            }
+        })
 
         // The Retrofit call
         val apiClient = ApiClient.getClient()
         if (apiClient != null ) {
             val apiInterface = apiClient.create(NewsInterface::class.java)
-            val callNews = apiInterface.getNews("test")
+            val callNews = apiInterface.getNews(BuildConfig.ApiKey)
             callNews.enqueue(object: Callback<MainResponse> {
                 override fun onResponse(call: Call<MainResponse>?, mainResponse: retrofit2.Response<MainResponse>?) {
                     val newsResponse = mainResponse?.body()
