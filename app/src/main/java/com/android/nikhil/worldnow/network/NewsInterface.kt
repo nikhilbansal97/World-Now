@@ -1,6 +1,6 @@
 package com.android.nikhil.worldnow.network
 
-import com.android.nikhil.worldnow.MainResponse
+import com.android.nikhil.worldnow.utils.MainResponse
 import retrofit2.http.GET
 import retrofit2.Call
 import retrofit2.http.Query
