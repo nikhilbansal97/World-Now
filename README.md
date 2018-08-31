@@ -1,4 +1,7 @@
 # World Now
+![Made in](https://img.shields.io/badge/made%20in-kotlin-blue.svg)
+![Pull Request](https://img.shields.io/badge/pull--request-welcome-green.svg)
+
 This is a news app make purely in Kotlin and uses the Architecture Components, Dagger2 and RxJava
 
 ## Dagger-Android & RxJava
@@ -19,3 +22,5 @@ The app is built using `dagger.android` and `RxJava`. Below is the brief about t
 Found a bug? Just create an `issue` and once assigned, start working on it!
 
 You feel that the app can be improved somehow? Maybe the architecture can be made more rebust so that the app is testable? Feel free to `fork` it and create a `Pull Request`.
+
+Made with 💙 in Kotlin
