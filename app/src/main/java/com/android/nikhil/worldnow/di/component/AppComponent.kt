@@ -3,7 +3,7 @@ package com.android.nikhil.worldnow.di.component
 import android.content.Context
 import com.android.nikhil.worldnow.NewsApplication
 import com.android.nikhil.worldnow.di.module.ActivityBindingModule
-import com.android.nikhil.worldnow.di.module.AppModule
+import com.android.nikhil.worldnow.di.module.NetworkModule
 import com.android.nikhil.worldnow.di.module.ViewModelFactoryModule
 import dagger.BindsInstance
 import dagger.Component
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
   AndroidSupportInjectionModule::class,
-  AppModule::class,
+  NetworkModule::class,
   ViewModelFactoryModule::class,
   ActivityBindingModule::class
 ])

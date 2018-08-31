@@ -1,4 +1,4 @@
-package com.android.nikhil.worldnow.ui
+package com.android.nikhil.worldnow.ui.news
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.android.nikhil.worldnow.R
-import com.android.nikhil.worldnow.ui.NewsRecyclerAdapter.NewsViewHolder
+import com.android.nikhil.worldnow.ui.news.NewsRecyclerAdapter.NewsViewHolder
 import com.android.nikhil.worldnow.utils.NewsItemClickListener
 import com.android.nikhil.worldnow.utils.Result
 import kotlinx.android.synthetic.main.list_item.view.item_date
