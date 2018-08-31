@@ -1,4 +1,4 @@
-package com.android.nikhil.worldnow
+package com.android.nikhil.worldnow.ui
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,10 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.list_item.view.*
+import com.android.nikhil.worldnow.R
+import com.android.nikhil.worldnow.ui.NewsRecyclerAdapter.NewsViewHolder
+import com.android.nikhil.worldnow.utils.NewsItemClickListener
+import com.android.nikhil.worldnow.utils.Result
+import kotlinx.android.synthetic.main.list_item.view.item_date
+import kotlinx.android.synthetic.main.list_item.view.item_section
+import kotlinx.android.synthetic.main.list_item.view.item_title
 
-class NewsRecyclerAdapter(var context: Context,var listener: NewsItemClickListener , var list: ArrayList<Result>?):
-        RecyclerView.Adapter<NewsRecyclerAdapter.NewsViewHolder>() {
+class NewsRecyclerAdapter(var context: Context,var listener: NewsItemClickListener, var list: ArrayList<Result>?):
+        RecyclerView.Adapter<NewsViewHolder>() {
 
     override fun getItemCount(): Int {
         return if (list != null) list!!.size else 0
