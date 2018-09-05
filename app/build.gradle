@@ -53,6 +53,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofit_adapter"
 
+    // Logging Interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_interceptor_version"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

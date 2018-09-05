@@ -32,6 +32,7 @@ ext {
     rxjava_version = "2.2.1"
     rxandroid_version = "2.1.0"
     retrofit_adapter = "1.0.0"
+    okhttp_interceptor_version = "3.11.0"
 }
 
 task clean(type: Delete) {
