@@ -5,6 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
+    buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.android.nikhil.worldnow"
         minSdkVersion 19
@@ -15,7 +16,7 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField 'String', "ApiKey", Guardian_ApiKey
+            buildConfigField 'String', "ApiKey", System.getenv("Guardian_ApiKey")
         }
         release {
             minifyEnabled false
@@ -30,7 +31,7 @@ dependencies {
 
     // Support Libraries
     implementation "com.android.support:design:$android_support_version"
-    implementation "com.android.support:appcompat-v7:$android_support_version"
+    implementation "com.android.support:appcompat-v7:$support_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
     // Retrofit

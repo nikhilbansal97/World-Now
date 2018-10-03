@@ -1,6 +1,7 @@
 # World Now
 ![Made in](https://img.shields.io/badge/made%20in-kotlin-blue.svg)
 ![Pull Request](https://img.shields.io/badge/pull--request-welcome-green.svg)
+[![Build Status](https://travis-ci.org/nikhilbansal97/World-Now.svg?branch=master)](https://travis-ci.org/nikhilbansal97/World-Now)
 
 This is a news app make purely in Kotlin and uses the Architecture Components, Dagger2 and RxJava
 
