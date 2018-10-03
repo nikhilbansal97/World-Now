@@ -2,29 +2,41 @@ package com.android.nikhil.worldnow.ui.news
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.util.Log
 import com.android.nikhil.worldnow.BuildConfig
+import com.android.nikhil.worldnow.domain.entity.Result
+import com.android.nikhil.worldnow.domain.entity.Section
 import com.android.nikhil.worldnow.network.NewsInterface
-import com.android.nikhil.worldnow.utils.MainResponse
-import com.android.nikhil.worldnow.utils.Result
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Call
-import retrofit2.Callback
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.HashSet
 
-class NewsViewModal @Inject constructor(): ViewModel() {
+class NewsViewModal @Inject constructor(
+        private val newsApi: NewsInterface
+) : ViewModel() {
 
-    private var newsLiveData = MutableLiveData<ArrayList<Result>>()
-    @Inject lateinit var newsApi: NewsInterface
+    val sectionItems = MutableLiveData<List<Section>>()
+    val selectedSections = HashSet<Section>()
+    private val newsLiveData = MutableLiveData<ArrayList<Result>>()
 
     fun getNews() {
         newsApi.getNews(BuildConfig.ApiKey)
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { mainRes -> mainRes.response.results }
-            .subscribe({ value -> newsLiveData.postValue(value) }, { e -> e.printStackTrace() })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { mainRes -> mainRes.response.results }
+                .subscribe({ value ->
+                    newsLiveData.postValue(value)
+                    val sections = value.asSequence()
+                            .map { Section(it.sectionName) }
+                            .distinct()
+                            .toList()
+                    sectionItems.postValue(sections)
+                    selectedSections.addAll(sections)
+                }, { throwable ->
+                    throwable.printStackTrace()
+                })
     }
 
-  fun getNewsData() = newsLiveData
+    fun getNewsData() = newsLiveData
 }
