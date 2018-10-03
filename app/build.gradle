@@ -15,7 +15,7 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField 'String', "ApiKey", Guardian_ApiKey
+            buildConfigField 'String', "ApiKey", System.getenv("Guardian_ApiKey")
         }
         release {
             minifyEnabled false
