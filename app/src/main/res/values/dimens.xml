@@ -1,0 +1,30 @@
+<resources>
+
+    <!-- Defaults-->
+    <dimen name="default_1dp">1dp</dimen>
+    <dimen name="default_2dp">2dp</dimen>
+    <dimen name="default_4dp">4dp</dimen>
+    <dimen name="default_8dp">8dp</dimen>
+    <dimen name="default_16dp">16dp</dimen>
+    <dimen name="default_32dp">32dp</dimen>
+    <dimen name="default_64dp">64dp</dimen>
+
+    <dimen name="default_12sp">12sp</dimen>
+    <dimen name="default_14sp">14sp</dimen>
+    <dimen name="default_16sp">16sp</dimen>
+    <dimen name="default_18sp">18sp</dimen>
+    <dimen name="default_20sp">20sp</dimen>
+
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="appbar_layout_elevation">4dp</dimen>
+
+    <dimen name="card_view_elevation">2dp</dimen>
+    <dimen name="card_view_pressed_translation_z">6dp</dimen>
+    <dimen name="card_view_margin">4dp</dimen>
+
+    <dimen name="article_card_image_height">250dp</dimen>
+    <dimen name="article_card_title_text_size">16sp</dimen>
+    <dimen name="article_card_date_text_size">12sp</dimen>
+    <dimen name="article_card_body_text_size">12sp</dimen>
+    
+</resources>
