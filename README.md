@@ -5,6 +5,8 @@
 
 This is a news app make purely in Kotlin and uses the Architecture Components, Dagger2 and RxJava
 
+![World Now Screenshot](https://media.giphy.com/media/5tmsrWiWlQR6MlyjZS/giphy.gif)
+
 ## Dagger-Android & RxJava
 
 The app is built using `dagger.android` and `RxJava`. Below is the brief about the packages in the app:
