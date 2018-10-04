@@ -6,6 +6,7 @@ android:
     - build-tools-28.0.3
     - android-28
 before_install:
+  - sed -i "\$a Guardian_ApiKey=\"Test_Key\"" ./gradle.properties
   - chmod +x gradlew
   - yes | sdkmanager "platforms;android-28"
 before_cache:
