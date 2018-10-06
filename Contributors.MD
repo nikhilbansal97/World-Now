@@ -1,2 +1,2 @@
-## Name: Naledi Madlopha
-## GitHub: [NalediMadlopha](https://github.com/NalediMadlopha)
+## Name: Randy Arba P.
+## GitHub: [RandyArbaGithub](https://github.com/Leviaran)

@@ -1,5 +1,7 @@
 package com.android.nikhil.worldnow.di.module
 
+import com.android.nikhil.worldnow.data.source.remote.NewsRemoteDataSource
+import com.android.nikhil.worldnow.data.source.repository.NewsRepository
 import com.android.nikhil.worldnow.network.NewsInterface
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
@@ -43,5 +45,11 @@ class NetworkModule {
   @Singleton
   fun getNewsInterface(retrofit: Retrofit): NewsInterface {
     return retrofit.create(NewsInterface::class.java)
+  }
+
+  @Provides
+  @Singleton
+  fun provideNewsRepository(newsApi : NewsInterface) : NewsRepository {
+    return NewsRepository(NewsRemoteDataSource(newsApi))
   }
 }

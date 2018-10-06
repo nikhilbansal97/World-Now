@@ -4,26 +4,37 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
 import com.android.nikhil.worldnow.BuildConfig
+import com.android.nikhil.worldnow.data.model.main_news.Result
+import com.android.nikhil.worldnow.data.source.datasource.NewsDataSource
+import com.android.nikhil.worldnow.data.source.repository.NewsRepository
 import com.android.nikhil.worldnow.network.NewsInterface
-import com.android.nikhil.worldnow.utils.MainResponse
-import com.android.nikhil.worldnow.utils.Result
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
+import java.util.*
 import javax.inject.Inject
 
 class NewsViewModal @Inject constructor(): ViewModel() {
 
-    private var newsLiveData = MutableLiveData<ArrayList<Result>>()
+    private var newsLiveData = MutableLiveData<List<Result>>()
     @Inject lateinit var newsApi: NewsInterface
+    @Inject lateinit var repository : NewsRepository
 
     fun getNews() {
-        newsApi.getNews(BuildConfig.ApiKey)
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { mainRes -> mainRes.response.results }
-            .subscribe({ value -> newsLiveData.postValue(value) }, { e -> e.printStackTrace() })
+        repository.remoteDataSource.getNews(object : NewsDataSource.getNewsCallback{
+            override fun onNewsLoaded(data: List<Result>?) {
+                newsLiveData.postValue(data)
+            }
+
+            override fun onDatanotAvalaible() {
+
+            }
+
+            override fun onError(errorMessage: String?) {
+
+            }
+        })
     }
 
   fun getNewsData() = newsLiveData

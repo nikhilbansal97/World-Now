@@ -7,9 +7,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.android.nikhil.worldnow.R
+import com.android.nikhil.worldnow.data.model.main_news.Result
 import com.android.nikhil.worldnow.utils.NewsItemClickListener
 import com.android.nikhil.worldnow.ui.base.BaseActivity
-import com.android.nikhil.worldnow.utils.Result
 import kotlinx.android.synthetic.main.activity_main.newsRecyclerView
 import javax.inject.Inject
 

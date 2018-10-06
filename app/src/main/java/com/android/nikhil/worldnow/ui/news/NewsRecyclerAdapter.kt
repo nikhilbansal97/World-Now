@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.android.nikhil.worldnow.R
+import com.android.nikhil.worldnow.data.model.main_news.Result
 import com.android.nikhil.worldnow.ui.news.NewsRecyclerAdapter.NewsViewHolder
 import com.android.nikhil.worldnow.utils.NewsItemClickListener
-import com.android.nikhil.worldnow.utils.Result
+
 import kotlinx.android.synthetic.main.list_item.view.item_date
 import kotlinx.android.synthetic.main.list_item.view.item_section
 import kotlinx.android.synthetic.main.list_item.view.item_title
@@ -37,7 +38,7 @@ class NewsRecyclerAdapter(var context: Context,var listener: NewsItemClickListen
        return NewsViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item, parent, false))
     }
 
-    fun swapNewsData(updatedList: ArrayList<Result>) {
+    fun swapNewsData(updatedList: List<Result>) {
         if (list == null) list = ArrayList<Result>()
         else list?.clear()
         list?.addAll(updatedList)

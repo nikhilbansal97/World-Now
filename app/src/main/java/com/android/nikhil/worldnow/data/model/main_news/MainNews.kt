@@ -1,8 +1,8 @@
-package com.android.nikhil.worldnow.utils
+package com.android.nikhil.worldnow.data.model.main_news
 
 import com.google.gson.annotations.SerializedName
 
-data class MainResponse (
+data class MainNews (
         @SerializedName("response")
         val response: NewsResponse
 )
