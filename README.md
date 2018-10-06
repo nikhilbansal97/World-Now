@@ -26,6 +26,22 @@ Found a bug? Just create an `issue` and once assigned, start working on it!
 
 You feel that the app can be improved somehow? Maybe the architecture can be made more robust so that the app is testable? Feel free to `fork` it and create a `Pull Request`.
 
+### Get an API Key from The Guardian - Open Platform
+This app makes use of The Guardian - Open Platform to display the news. In order to access this API,
+ you'll need an API Key. Follow these 6 steps to obtain your key:
+
+1. Go to [open-platform.theguardian.com](https://open-platform.theguardian.com/);
+2. Scroll down to find [Register for a developer key](https://bonobo.capi.gutools.co.uk/register/developer)
+ and click on it;
+3. Fill the form with your name, email and product name (in our case "World Now") and accept the T&C;
+4. Check your email inbox, you should have received your key;
+5. Open your global `gradle.properties` file in a text editor. On Windows, it's usually located at
+ `C:/Users/YOUR_USERNAME/.gradle/` . On Linux and MacOS it's under `~/.gradle/`;
+6. Add a field `Guardian_ApiKey="ENTER_YOUR_API_KEY_HERE"` in this file then rebuild the project.
+ A `BuildConfig` file with be generated with a field called `ApiKey`
+ because of this line `buildConfigField 'String', "ApiKey", Guardian_ApiKey` that is in the app
+  module [build.gradle(app)](app/build.gradle) file;
+
 ### Guidelines
 * Create an issue or comment on an existing one. Wait until it is assigned to you.
 * Add your name to the Contributors.MD file in format
