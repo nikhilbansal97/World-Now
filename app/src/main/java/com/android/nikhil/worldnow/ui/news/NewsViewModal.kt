@@ -3,6 +3,7 @@ package com.android.nikhil.worldnow.ui.news
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
+import android.widget.Toast
 import com.android.nikhil.worldnow.BuildConfig
 import com.android.nikhil.worldnow.data.model.main_news.Result
 import com.android.nikhil.worldnow.data.source.datasource.NewsDataSource
@@ -17,7 +18,7 @@ import javax.inject.Inject
 
 class NewsViewModal @Inject constructor(): ViewModel() {
 
-    private var newsLiveData = MutableLiveData<List<Result>>()
+    var newsLiveData = MutableLiveData<List<Result>>()
     @Inject lateinit var repository : NewsRepository
 
     fun getNews() {
@@ -27,7 +28,7 @@ class NewsViewModal @Inject constructor(): ViewModel() {
             }
 
             override fun onDatanotAvalaible() {
-
+                Log.e("NewsModelTag", "data not available")
             }
 
             override fun onError(errorMessage: String?) {
@@ -36,5 +37,4 @@ class NewsViewModal @Inject constructor(): ViewModel() {
         })
     }
 
-  fun getNewsData() = newsLiveData
 }

@@ -1,6 +1,7 @@
 package com.android.nikhil.worldnow.ui.news
 
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.android.nikhil.worldnow.R
 import com.android.nikhil.worldnow.data.model.main_news.Result
+import com.android.nikhil.worldnow.databinding.ListItemBinding
 import com.android.nikhil.worldnow.ui.news.NewsRecyclerAdapter.NewsViewHolder
 import com.android.nikhil.worldnow.utils.NewsItemClickListener
 
@@ -24,18 +26,15 @@ class NewsRecyclerAdapter(var context: Context,var listener: NewsItemClickListen
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         if (list != null) {
-            val currentNews = list!![position]
-            holder.apply {
-                textViewTitle.text = currentNews.webTitle
-                textViewSection.text = currentNews.sectionName
-                textViewDate.text = currentNews.webPublicationDate
-                view.setOnClickListener { _ -> listener.onNewsClicked(currentNews.webUrl) }
-            }
+            holder.bindItem(list!![position])
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-       return NewsViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item, parent, false))
+        val itemBinding = DataBindingUtil
+                .inflate<ListItemBinding>(LayoutInflater.from(parent.context),
+                        R.layout.list_item, parent, false) as ListItemBinding
+        return NewsViewHolder(itemBinding)
     }
 
     fun swapNewsData(updatedList: List<Result>) {
@@ -45,9 +44,11 @@ class NewsRecyclerAdapter(var context: Context,var listener: NewsItemClickListen
         notifyDataSetChanged()
     }
 
-    inner class NewsViewHolder(var view: View): RecyclerView.ViewHolder(view) {
-        var textViewTitle = view.item_title as TextView
-        var textViewSection = view.item_section as TextView
-        var textViewDate = view.item_date as TextView
+    inner class NewsViewHolder(var view: ListItemBinding): RecyclerView.ViewHolder(view.root) {
+
+        fun bindItem(news: Result){
+            view.item = news
+            view.executePendingBindings()
+        }
     }
 }

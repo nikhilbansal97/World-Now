@@ -27,18 +27,21 @@
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{item.webTitle}"
             android:padding="4dp"/>
 
         <TextView
             android:id="@+id/item_section"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{item.sectionName}"
             android:padding="4dp"/>
 
         <TextView
             android:id="@+id/item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{item.webPublicationDate}"
             android:padding="4dp"/>
 
     </LinearLayout>

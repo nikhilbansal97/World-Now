@@ -35,16 +35,16 @@ class NewsActivity : BaseActivity<NewsViewModal>(), NewsItemClickListener {
             it.viewModel = mViewModel
             it.setLifecycleOwner(this@NewsActivity)
         }
+
         setupNews()
     }
 
     override fun onResume() {
         super.onResume()
-        dataBinding.viewModel.getNews()
+        dataBinding.viewModel?.getNews()
     }
 
     fun setupNews(){
-
         val viewModel = dataBinding.viewModel
         if (viewModel != null){
             // Get the ViewHolder for this activity
