@@ -18,7 +18,6 @@ import javax.inject.Inject
 class NewsViewModal @Inject constructor(): ViewModel() {
 
     private var newsLiveData = MutableLiveData<List<Result>>()
-    @Inject lateinit var newsApi: NewsInterface
     @Inject lateinit var repository : NewsRepository
 
     fun getNews() {
