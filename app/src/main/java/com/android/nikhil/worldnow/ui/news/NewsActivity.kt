@@ -54,7 +54,7 @@ class NewsActivity : BaseActivity<NewsViewModal>(), NewsItemClickListener {
     }
 
     // This function is called when a news item is clicked.
-    override fun onNewsClicked(url: String) {
+    override fun onNewsClicked(view : View, url: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)

@@ -26,7 +26,7 @@ class NewsRecyclerAdapter(var context: Context,var listener: NewsItemClickListen
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         if (list != null) {
-            holder.bindItem(list!![position])
+            holder.bindItem(list!![position], listener)
         }
     }
 
@@ -46,9 +46,10 @@ class NewsRecyclerAdapter(var context: Context,var listener: NewsItemClickListen
 
     inner class NewsViewHolder(var view: ListItemBinding): RecyclerView.ViewHolder(view.root) {
 
-        fun bindItem(news: Result){
+        fun bindItem(news: Result, listener: NewsItemClickListener){
             view.item = news
             view.executePendingBindings()
+            view.onItemClicked = listener
         }
     }
 }
