@@ -1,5 +1,7 @@
 package com.android.nikhil.worldnow.utils
 
+import android.view.View
+
 interface NewsItemClickListener {
-    fun onNewsClicked(url: String)
+    fun onNewsClicked(view: View, url: String)
 }

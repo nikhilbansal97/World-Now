@@ -2,14 +2,17 @@ package com.android.nikhil.worldnow.ui.news
 
 import android.arch.lifecycle.Observer
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.View
 import com.android.nikhil.worldnow.R
+import com.android.nikhil.worldnow.data.model.main_news.Result
+import com.android.nikhil.worldnow.databinding.ActivityMainBinding
 import com.android.nikhil.worldnow.utils.NewsItemClickListener
 import com.android.nikhil.worldnow.ui.base.BaseActivity
-import com.android.nikhil.worldnow.utils.Result
 import kotlinx.android.synthetic.main.activity_main.newsRecyclerView
 import javax.inject.Inject
 
@@ -20,29 +23,38 @@ class NewsActivity : BaseActivity<NewsViewModal>(), NewsItemClickListener {
     private val TAG = NewsActivity::class.java.simpleName
     private lateinit var adapter: NewsRecyclerAdapter
     @Inject lateinit var mViewModel: NewsViewModal
+    private lateinit var dataBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        // Get the ViewHolder for this activity
-        adapter = NewsRecyclerAdapter(this, this, ArrayList<Result>())
-        newsRecyclerView.adapter = adapter
-        newsRecyclerView.layoutManager = LinearLayoutManager(this)
+        //Set Main data binding view
+        dataBinding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
-        // Observe the MutableLiveData in the ViewHolder.
-        mViewModel.getNewsData().observe(this, Observer { list ->
-            run {
-                if (list != null) adapter.swapNewsData(list)
-                else Log.d(TAG, "Updated list is null")
-            }
-        })
+        dataBinding.let {
+            it.viewModel = mViewModel
+            it.setLifecycleOwner(this@NewsActivity)
+        }
 
-        mViewModel.getNews()
+        setupNews()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        dataBinding.viewModel?.getNews()
+    }
+
+    fun setupNews(){
+        val viewModel = dataBinding.viewModel
+        if (viewModel != null){
+            // Get the ViewHolder for this activity
+            adapter = NewsRecyclerAdapter(this, this, ArrayList<Result>())
+            dataBinding.newsRecyclerView.adapter = adapter
+        }
     }
 
     // This function is called when a news item is clicked.
-    override fun onNewsClicked(url: String) {
+    override fun onNewsClicked(view : View, url: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)
