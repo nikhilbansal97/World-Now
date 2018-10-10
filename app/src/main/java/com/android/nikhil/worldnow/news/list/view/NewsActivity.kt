@@ -1,11 +1,12 @@
-package com.android.nikhil.worldnow.ui.news
+package com.android.nikhil.worldnow.news.list.view
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.android.nikhil.worldnow.R
-import com.android.nikhil.worldnow.ui.base.BaseActivity
+import com.android.nikhil.worldnow.base.view.BaseActivity
+import com.android.nikhil.worldnow.news.list.viewmodel.NewsViewModal
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 

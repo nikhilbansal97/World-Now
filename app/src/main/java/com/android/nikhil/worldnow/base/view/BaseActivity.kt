@@ -1,4 +1,4 @@
-package com.android.nikhil.worldnow.ui.base
+package com.android.nikhil.worldnow.base.view
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

@@ -3,7 +3,7 @@ package com.android.nikhil.worldnow.di.module
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.android.nikhil.worldnow.di.qualifier.ViewModelKey
-import com.android.nikhil.worldnow.ui.news.NewsViewModal
+import com.android.nikhil.worldnow.news.list.viewmodel.NewsViewModal
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
