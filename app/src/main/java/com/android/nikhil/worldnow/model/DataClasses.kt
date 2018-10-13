@@ -1,4 +1,4 @@
-package com.android.nikhil.worldnow.utils
+package com.android.nikhil.worldnow.model
 
 import com.google.gson.annotations.SerializedName
 

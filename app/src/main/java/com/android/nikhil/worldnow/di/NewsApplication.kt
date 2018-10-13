@@ -1,4 +1,4 @@
-package com.android.nikhil.worldnow
+package com.android.nikhil.worldnow.di
 
 import com.android.nikhil.worldnow.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector

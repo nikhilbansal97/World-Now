@@ -1,4 +1,4 @@
-package com.android.nikhil.worldnow.ui.news
+package com.android.nikhil.worldnow.news.list.view
 
 import android.content.Context
 import android.content.Intent
@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.nikhil.worldnow.R
-import com.android.nikhil.worldnow.ui.news.NewsRecyclerAdapter.NewsViewHolder
-import com.android.nikhil.worldnow.utils.Result
+import com.android.nikhil.worldnow.news.list.view.NewsRecyclerAdapter.NewsViewHolder
+import com.android.nikhil.worldnow.model.Result
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.news_article_card.*
 

@@ -1,22 +1,18 @@
-package com.android.nikhil.worldnow.ui.news
+package com.android.nikhil.worldnow.news.list.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.util.Log
 import com.android.nikhil.worldnow.BuildConfig
-import com.android.nikhil.worldnow.network.NewsInterface
-import com.android.nikhil.worldnow.utils.MainResponse
-import com.android.nikhil.worldnow.utils.Result
+import com.android.nikhil.worldnow.service.NewsService
+import com.android.nikhil.worldnow.model.Result
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Call
-import retrofit2.Callback
 import javax.inject.Inject
 
 class NewsViewModal @Inject constructor(): ViewModel() {
 
     private var newsLiveData = MutableLiveData<ArrayList<Result>>()
-    @Inject lateinit var newsApi: NewsInterface
+    @Inject lateinit var newsApi: NewsService
 
     fun getNews() {
         newsApi.getNews(BuildConfig.ApiKey)

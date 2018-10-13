@@ -1,6 +1,6 @@
 package com.android.nikhil.worldnow.di.module
 
-import com.android.nikhil.worldnow.network.NewsInterface
+import com.android.nikhil.worldnow.service.NewsService
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+class ServiceModule {
 
   @Provides
   @Singleton
@@ -41,7 +41,7 @@ class NetworkModule {
 
   @Provides
   @Singleton
-  fun getNewsInterface(retrofit: Retrofit): NewsInterface {
-    return retrofit.create(NewsInterface::class.java)
+  fun getNewsService(retrofit: Retrofit): NewsService {
+    return retrofit.create(NewsService::class.java)
   }
 }
