@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import com.android.nikhil.worldnow.R
 import com.android.nikhil.worldnow.base.view.BaseActivity
+import com.android.nikhil.worldnow.model.Result
 import com.android.nikhil.worldnow.news.list.viewmodel.NewsViewModal
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -27,7 +28,7 @@ class NewsActivity : BaseActivity<NewsViewModal>() {
                 newsListProgressBar.visibility = View.GONE
 
                 if (list != null) {
-                    adapter.swapNewsData(list)
+                    adapter.swapNewsData(list as ArrayList<Result>)
                 } else {
                     Log.d(NewsActivity::class.java.simpleName, "Updated resultsList is null")
                 }
