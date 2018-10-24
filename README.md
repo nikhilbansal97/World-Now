@@ -2,6 +2,7 @@
 ![Made in](https://img.shields.io/badge/made%20in-kotlin-blue.svg)
 ![Pull Request](https://img.shields.io/badge/pull--request-welcome-green.svg)
 [![Build Status](https://travis-ci.org/nikhilbansal97/World-Now.svg?branch=master)](https://travis-ci.org/nikhilbansal97/World-Now)
+![License](https://img.shields.io/badge/license-Apache-orange.svg)
 
 This is a news app make purely in Kotlin and uses the Architecture Components, Dagger2 and RxJava
 
@@ -70,5 +71,8 @@ git push origin branch-name
 * Create a new pull request from your forked repository
 * Wait for your PR to be merged and approved.
 
+
+### License
+[Apache License](LICENSE.txt)
 
 Made with 💙 in Kotlin
