@@ -36,8 +36,10 @@ This app makes use of The Guardian - Open Platform to display the news. In order
  and click on it;
 3. Fill the form with your name, email and product name (in our case "World Now") and accept the T&C;
 4. Check your email inbox, you should have received your key;
-5. Open your global `gradle.properties` file in a text editor. On Windows, it's usually located at
- `C:/Users/YOUR_USERNAME/.gradle/` . On Linux and MacOS it's under `~/.gradle/`;
+5. Open your global `gradle.properties` file in a text editor. It can be found at:
+   * Windows: `C:\Users\YOUR_USERNAME\.gradle\`
+   * Linux: `/home/YOUR_USERNAME/.gradle`
+   * Mac: `/Users/YOUR_USERNAME/.gradle`
 6. Add a field `Guardian_ApiKey="ENTER_YOUR_API_KEY_HERE"` in this file then rebuild the project.
  A `BuildConfig` file with be generated with a field called `ApiKey`
  because of this line `buildConfigField 'String', "ApiKey", Guardian_ApiKey` that is in the app
