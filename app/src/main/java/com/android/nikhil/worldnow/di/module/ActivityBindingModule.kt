@@ -1,6 +1,6 @@
 package com.android.nikhil.worldnow.di.module
 
-import com.android.nikhil.worldnow.news.list.view.NewsActivity
+import com.android.nikhil.worldnow.news.list.NewsActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

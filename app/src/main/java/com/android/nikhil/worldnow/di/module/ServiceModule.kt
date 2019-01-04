@@ -26,7 +26,9 @@ class ServiceModule {
 
   @Provides
   @Singleton
-  fun getClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
+  fun getClient(
+    interceptor: HttpLoggingInterceptor
+  ): OkHttpClient {
     return OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .build()
