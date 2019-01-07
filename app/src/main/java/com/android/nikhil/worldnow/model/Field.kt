@@ -1,6 +1,11 @@
 package com.android.nikhil.worldnow.model
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmModel
+import io.realm.annotations.RealmClass
 
-data class Field(@SerializedName("thumbnail") @Expose val thumbnail: String)
+@RealmClass
+open class Field : RealmModel {
+  @SerializedName("thumbnail")
+  var thumbnail: String = ""
+}

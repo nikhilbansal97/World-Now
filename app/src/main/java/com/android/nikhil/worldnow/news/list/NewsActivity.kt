@@ -19,13 +19,21 @@ class NewsActivity : BaseActivity<NewsViewModal>() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    adapter = NewsRecyclerAdapter(this, ArrayList())
-    newsRecyclerView.adapter = adapter
+    setupNewsAdapter()
+    mViewModel.observeRepository()
     mViewModel.getNews()
     observeNewsData()
     observeError()
   }
 
+  private fun setupNewsAdapter() {
+    adapter = NewsRecyclerAdapter(this, ArrayList())
+    newsRecyclerView.adapter = adapter
+  }
+
+  /*
+  * Observe the viewmodel for any errors and update the UI accordingly.
+  */
   private fun observeError() {
     mViewModel.getErrorLiveData()
         .observe(this, Observer {
@@ -33,6 +41,9 @@ class NewsActivity : BaseActivity<NewsViewModal>() {
         })
   }
 
+  /*
+  * Observe the live data in the view model to update the UI accordingly.
+  */
   private fun observeNewsData() {
     mViewModel.getNewsData()
         .observe(this, Observer { list ->
