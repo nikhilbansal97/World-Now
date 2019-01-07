@@ -15,11 +15,11 @@ The app is built using `dagger.android` and `RxJava`. Below is the brief about t
     * `component` : It contains the `AppComponent` that is responsible for generating all the code for injection and connecting the modules to injections.
     * `module` : It contains the Modules that provide the dependencies needed by the app.
     * `qualifier` : It contains the `ViewModelKey` `@MapKey` responsible for the injection in the `ViewModel`
-  * `network` : This package contains a `NewsInterface` that is used by `Retrofit` to make network calls.
-  * `ui` : It contains all the classes related to Android ui. For ex: `Activity`, `ViewModel`, `Adapter` etc.
-    * `base` : Contains the `BaseActivity` that will be inherited by all the other activities.
-    * `news` : Contains the `Activity` and `ViewModel` for the news.
-  * `utils` : It contains the utility classes such as a `ClickListener`, `DataClasses` etc.
+  * `base` : It contains the base classes for `Activity` and `ViewModel`
+  * `model` : Contains all the POJOs
+  * `news/list` : Contains the activity, adapter and viewmodel for the news list.
+  * `repository` : Contains the repository for the app. This repository is responsible for loading data from server, caching it and providing it to the viewmodel.
+  * `service` : Interface that is used by reteofit for the API calls.
 
 ## Contributions
 
