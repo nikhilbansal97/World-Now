@@ -1,45 +1,34 @@
 package com.android.nikhil.worldnow.model
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmModel
+import io.realm.annotations.RealmClass
 
-data class Result(
+@RealmClass
+open class Result : RealmModel {
 
-    @SerializedName("id")
-    @Expose
-    var id: String? = null,
-    @SerializedName("type")
-    @Expose
-    var type: String? = null,
-    @SerializedName("sectionId")
-    @Expose
-    var sectionId: String? = null,
-    @SerializedName("sectionName")
-    @Expose
-    var sectionName: String? = null,
-    @SerializedName("webPublicationDate")
-    @Expose
-    var webPublicationDate: String? = null,
-    @SerializedName("webTitle")
-    @Expose
-    var webTitle: String? = null,
-    @SerializedName("webUrl")
-    @Expose
-    var webUrl: String? = null,
-    @SerializedName("apiUrl")
-    @Expose
-    var apiUrl: String? = null,
-    @SerializedName("isHosted")
-    @Expose
-    var isHosted: Boolean? = null,
-    @SerializedName("pillarId")
-    @Expose
-    var pillarId: String? = null,
-    @SerializedName("pillarName")
-    @Expose
-    var pillarName: String? = null,
-    @SerializedName("field")
-    @Expose
-    var field: Field? = null
-
-)
+  @SerializedName("id")
+  var id: String? = null
+  @SerializedName("type")
+  var type: String? = null
+  @SerializedName("sectionId")
+  var sectionId: String? = null
+  @SerializedName("sectionName")
+  var sectionName: String? = null
+  @SerializedName("webPublicationDate")
+  var webPublicationDate: String? = null
+  @SerializedName("webTitle")
+  var webTitle: String? = null
+  @SerializedName("webUrl")
+  var webUrl: String? = null
+  @SerializedName("apiUrl")
+  var apiUrl: String? = null
+  @SerializedName("isHosted")
+  var isHosted: Boolean? = null
+  @SerializedName("pillarId")
+  var pillarId: String? = null
+  @SerializedName("pillarName")
+  var pillarName: String? = null
+  @SerializedName("field")
+  var field: Field? = null
+}

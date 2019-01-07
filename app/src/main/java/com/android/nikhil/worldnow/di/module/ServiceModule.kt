@@ -4,6 +4,8 @@ import com.android.nikhil.worldnow.service.NewsService
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
@@ -13,6 +15,8 @@ import javax.inject.Singleton
 
 @Module
 class ServiceModule {
+
+  private val realm_filename = "worldnews.realm"
 
   @Provides
   @Singleton
@@ -46,4 +50,13 @@ class ServiceModule {
   fun getNewsService(retrofit: Retrofit): NewsService {
     return retrofit.create(NewsService::class.java)
   }
+
+  @Provides
+  fun getRealmObject(): Realm {
+    val configuration = RealmConfiguration.Builder()
+        .name(realm_filename)
+        .build()
+    return Realm.getInstance(configuration)
+  }
+
 }
