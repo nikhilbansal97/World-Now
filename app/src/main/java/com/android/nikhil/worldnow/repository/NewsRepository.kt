@@ -21,7 +21,7 @@ class NewsRepository @Inject constructor() {
   @Inject lateinit var newsService: NewsService
   private var compositeDisposable = CompositeDisposable()
   private val realm = Realm.getDefaultInstance()
-  private val newsListLiveData = MutableLiveData<ArrayList<Result>>()
+  val newsListLiveData = MutableLiveData<ArrayList<Result>>()
 
   /*
   * Main method exposed to the viewmodel to get the news.
