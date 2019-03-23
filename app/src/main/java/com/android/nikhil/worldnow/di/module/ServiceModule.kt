@@ -1,6 +1,7 @@
 package com.android.nikhil.worldnow.di.module
 
 import com.android.nikhil.worldnow.service.NewsService
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -20,11 +21,13 @@ class ServiceModule {
 
   @Provides
   @Singleton
-  fun getRetrofit(): Retrofit {
+  fun getRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .baseUrl("https://content.guardianapis.com")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .client(okHttpClient)
         .build()
   }
 
