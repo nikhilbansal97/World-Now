@@ -7,12 +7,11 @@ import com.android.nikhil.worldnow.model.Result
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewsViewModal @Inject constructor() : BaseViewModel() {
+class NewsViewModal @Inject constructor(private val newsRepository: NewsRepository) :
+    BaseViewModel() {
 
   private var error = MutableLiveData<Boolean>()
   private var newsLiveData = MutableLiveData<List<Result>>()
-
-  @Inject lateinit var newsRepository: NewsRepository
 
   fun getNews() {
     viewModelScope.launch {

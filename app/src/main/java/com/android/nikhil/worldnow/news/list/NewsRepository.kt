@@ -14,12 +14,10 @@ import javax.inject.Inject
 * First the local data will be provided and then it will be updated by the server's response.
 */
 
-class NewsRepository @Inject constructor() {
+class NewsRepository @Inject constructor(private val newsService: NewsService) {
 
   private val realm = Realm.getDefaultInstance()
-
   val newsListLiveData = MutableLiveData<ArrayList<Result>>()
-  @Inject lateinit var newsService: NewsService
 
   /*
   * Main method exposed to the viewmodel to get the news.
