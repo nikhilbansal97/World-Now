@@ -56,10 +56,9 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
-    // RxJava and RxAndroid
-    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
-    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofit_adapter"
+    // Coroutines
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutine_calladapter"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 
     // Logging Interceptor
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_interceptor_version"
