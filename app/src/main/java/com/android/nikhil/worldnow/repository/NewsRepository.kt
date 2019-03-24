@@ -4,11 +4,11 @@ import android.arch.lifecycle.MutableLiveData
 import com.android.nikhil.worldnow.BuildConfig
 import com.android.nikhil.worldnow.model.Result
 import com.android.nikhil.worldnow.service.NewsService
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /*
@@ -19,23 +19,24 @@ import javax.inject.Inject
 class NewsRepository @Inject constructor() {
 
   @Inject lateinit var newsService: NewsService
-  private var compositeDisposable = CompositeDisposable()
   private val realm = Realm.getDefaultInstance()
   val newsListLiveData = MutableLiveData<ArrayList<Result>>()
 
   /*
   * Main method exposed to the viewmodel to get the news.
   */
-  fun getNews(): ArrayList<Result> {
-    val news = getNewsFromDb()
-    getNewsFromServer()
-    return news
+  suspend fun getNews()= coroutineScope {
+    async { getNewsFromServer() }
+    launch(Dispatchers.Main) {
+      newsListLiveData.postValue(getNewsFromDb())
+    }
   }
+
 
   /*
   * Get the news from Realm Database
   */
-  private fun getNewsFromDb(): ArrayList<Result> {
+  private  fun getNewsFromDb(): ArrayList<Result>{
     realm.beginTransaction()
     val realmResults = realm.where(Result::class.java)
         .findAll()
@@ -62,14 +63,15 @@ class NewsRepository @Inject constructor() {
   /*
   * Get the news from the server
   */
-  private fun getNewsFromServer() {
-    addDisposable(
-        newsService.getNews(BuildConfig.ApiKey)
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { mainRes -> mainRes.response?.results }
-            .subscribe({ value -> processNews(value) }, { e -> e.printStackTrace() })
-    )
+  private suspend fun getNewsFromServer() {
+    try {
+      val webResponse = newsService.getNews(BuildConfig.ApiKey).await()
+      webResponse.response?.let {
+        coroutineScope { launch(Dispatchers.Main) { processNews(it.results) } }
+      }
+    }catch (e:Exception){
+      e.printStackTrace()
+    }
   }
 
   /*
@@ -82,7 +84,5 @@ class NewsRepository @Inject constructor() {
     }
   }
 
-  private fun addDisposable(disposable: Disposable) {
-    compositeDisposable.add(disposable)
-  }
+
 }
