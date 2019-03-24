@@ -18,35 +18,37 @@ import javax.inject.Inject
 
 class NewsRepository @Inject constructor() {
 
-  @Inject lateinit var newsService: NewsService
   private val realm = Realm.getDefaultInstance()
+
   val newsListLiveData = MutableLiveData<ArrayList<Result>>()
+  @Inject lateinit var newsService: NewsService
 
   /*
   * Main method exposed to the viewmodel to get the news.
   */
-  suspend fun getNews()= coroutineScope {
+  suspend fun getNews() = coroutineScope {
     async { getNewsFromServer() }
     launch(Dispatchers.Main) {
       newsListLiveData.postValue(getNewsFromDb())
     }
   }
 
-
   /*
   * Get the news from Realm Database
   */
-  private  fun getNewsFromDb(): ArrayList<Result>{
-    realm.beginTransaction()
-    val realmResults = realm.where(Result::class.java)
-        .findAll()
+  private suspend fun getNewsFromDb(): ArrayList<Result> {
     val results = ArrayList<Result>()
-    for (result in realmResults) {
-      if (result != null) {
-        results.add(result)
+    coroutineScope {
+      realm.beginTransaction()
+      val realmResults = realm.where(Result::class.java)
+          .findAll()
+      for (result in realmResults) {
+        if (result != null) {
+          results.add(result)
+        }
       }
+      realm.commitTransaction()
     }
-    realm.commitTransaction()
     return results
   }
 
@@ -67,9 +69,9 @@ class NewsRepository @Inject constructor() {
     try {
       val webResponse = newsService.getNews(BuildConfig.ApiKey).await()
       webResponse.response?.let {
-        coroutineScope { launch(Dispatchers.Main) { processNews(it.results) } }
+        coroutineScope { processNews(it.results) }
       }
-    }catch (e:Exception){
+    } catch (e: Exception) {
       e.printStackTrace()
     }
   }
@@ -77,12 +79,13 @@ class NewsRepository @Inject constructor() {
   /*
   * Update the database and notify the viewmodel about the new news items received.
   */
-  private fun processNews(value: List<Result>?) {
+  private suspend fun processNews(value: List<Result>?) {
     if (value != null) {
-      saveNewsInDb(value as ArrayList<Result>)
-      newsListLiveData.postValue(value)
+      coroutineScope {
+        saveNewsInDb(value as ArrayList<Result>)
+        newsListLiveData.postValue(value)
+      }
     }
   }
-
 
 }
