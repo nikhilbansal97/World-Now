@@ -7,11 +7,11 @@
 Open Source News app for practice and any new people looking to contribute!
 
 ### Libraries used
-* ![Architecture Components(ViewModel, LiveData etc.)](https://developer.android.com/topic/libraries/architecture)
-* ![Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
-* ![Dagger Andrid](https://dagger.dev/dev-guide/android.html)
-* ![Retrofit](https://square.github.io/retrofit/)
-* ![Realm Database](https://realm.io/docs/kotlin/latest/)
+* [Architecture Components(ViewModel, LiveData etc.)](https://developer.android.com/topic/libraries/architecture)
+* [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
+* [Dagger Andrid](https://dagger.dev/dev-guide/android.html)
+* [Retrofit](https://square.github.io/retrofit/)
+* [Realm Database](https://realm.io/docs/kotlin/latest/)
 
 ## Project Structure
 
