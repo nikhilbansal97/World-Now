@@ -20,12 +20,11 @@ class ServiceModule {
 
   @Provides
   @Singleton
-  fun getRetrofit(okHttpClient: OkHttpClient): Retrofit {
+  fun getRetrofit(): Retrofit {
     return Retrofit.Builder()
         .baseUrl("https://content.guardianapis.com")
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .client(okHttpClient)
+        .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
         .build()
   }
 

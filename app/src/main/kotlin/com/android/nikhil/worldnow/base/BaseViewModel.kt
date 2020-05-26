@@ -3,9 +3,14 @@ package com.android.nikhil.worldnow.base
 import android.arch.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
+
   // Defines the background work that needs to be done.
   private val parentJob = Job()
   // Contains the information regarding the dispatcher and the job.
@@ -21,4 +26,5 @@ open class BaseViewModel : ViewModel() {
     parentJob.cancel()
     super.onCleared()
   }
+
 }

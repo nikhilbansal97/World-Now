@@ -1,4 +1,4 @@
-package com.android.nikhil.worldnow.repository
+package com.android.nikhil.worldnow.news.list
 
 import android.arch.lifecycle.MutableLiveData
 import com.android.nikhil.worldnow.BuildConfig
@@ -8,7 +8,7 @@ import io.realm.Realm
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /*
@@ -16,21 +16,19 @@ import javax.inject.Inject
 * First the local data will be provided and then it will be updated by the server's response.
 */
 
-class NewsRepository @Inject constructor() {
+class NewsRepository @Inject constructor(private val newsService: NewsService) {
 
   private val realm = Realm.getDefaultInstance()
-
   val newsListLiveData = MutableLiveData<ArrayList<Result>>()
-  @Inject lateinit var newsService: NewsService
 
   /*
   * Main method exposed to the viewmodel to get the news.
   */
-  suspend fun getNews() = coroutineScope {
+  suspend fun getNews(): ArrayList<Result> = coroutineScope {
+    // As the below tasks are independent of each other, we can run them parallelly.
+    val news = async { getNewsFromDb() }
     async { getNewsFromServer() }
-    launch(Dispatchers.Main) {
-      newsListLiveData.postValue(getNewsFromDb())
-    }
+    news.await()
   }
 
   /*
@@ -38,15 +36,12 @@ class NewsRepository @Inject constructor() {
   */
   private suspend fun getNewsFromDb(): ArrayList<Result> {
     val results = ArrayList<Result>()
-    coroutineScope {
+    withContext(Dispatchers.IO) {
       realm.beginTransaction()
       val realmResults = realm.where(Result::class.java)
           .findAll()
-      for (result in realmResults) {
-        if (result != null) {
-          results.add(result)
-        }
-      }
+      realmResults.filterNotNull()
+          .forEach { results.add(it) }
       realm.commitTransaction()
     }
     return results
@@ -55,24 +50,23 @@ class NewsRepository @Inject constructor() {
   /*
   * Save the news in the Realm database
   */
-  private fun saveNewsInDb(newsList: ArrayList<Result>) {
-    val realm = Realm.getDefaultInstance()
-    realm.beginTransaction()
-    realm.insert(newsList)
-    realm.commitTransaction()
+  private suspend fun saveNewsInDb(newsList: ArrayList<Result>) {
+    withContext(Dispatchers.IO) {
+      val realm = Realm.getDefaultInstance()
+      realm.beginTransaction()
+      realm.insert(newsList)
+      realm.commitTransaction()
+    }
   }
 
   /*
   * Get the news from the server
   */
   private suspend fun getNewsFromServer() {
-    try {
-      val webResponse = newsService.getNews(BuildConfig.ApiKey).await()
-      webResponse.response?.let {
-        coroutineScope { processNews(it.results) }
-      }
-    } catch (e: Exception) {
-      e.printStackTrace()
+    withContext(Dispatchers.IO) {
+      val news = newsService.getNews("BuildConfig.ApiKey")
+          .await()
+      processNews(news.response?.results)
     }
   }
 
@@ -81,11 +75,8 @@ class NewsRepository @Inject constructor() {
   */
   private suspend fun processNews(value: List<Result>?) {
     if (value != null) {
-      coroutineScope {
-        saveNewsInDb(value as ArrayList<Result>)
-        newsListLiveData.postValue(value)
-      }
+      saveNewsInDb(value as ArrayList<Result>)
+      newsListLiveData.postValue(value)
     }
   }
-
 }

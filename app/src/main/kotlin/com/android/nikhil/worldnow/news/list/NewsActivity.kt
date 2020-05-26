@@ -1,6 +1,7 @@
 package com.android.nikhil.worldnow.news.list
 
 import android.arch.lifecycle.Observer
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.android.nikhil.worldnow.R
@@ -13,15 +14,13 @@ import javax.inject.Inject
 class NewsActivity : BaseActivity<NewsViewModal>() {
 
   private lateinit var adapter: NewsRecyclerAdapter
-  @Inject lateinit var mViewModel: NewsViewModal
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
     setupNewsAdapter()
-    mViewModel.observeRepository()
-    mViewModel.getNews()
+    viewModel.getNews()
     observeNewsData()
     observeError()
   }
@@ -35,7 +34,7 @@ class NewsActivity : BaseActivity<NewsViewModal>() {
   * Observe the viewmodel for any errors and update the UI accordingly.
   */
   private fun observeError() {
-    mViewModel.getErrorLiveData()
+    viewModel.getErrorLiveData()
         .observe(this, Observer {
           newsListProgressBar.visibility = View.GONE
         })
@@ -45,7 +44,7 @@ class NewsActivity : BaseActivity<NewsViewModal>() {
   * Observe the live data in the view model to update the UI accordingly.
   */
   private fun observeNewsData() {
-    mViewModel.getNewsData()
+    viewModel.getNewsData()
         .observe(this, Observer { list ->
           run {
             newsListProgressBar.visibility = View.GONE

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Downloads.World-Now.iml" filepath="$PROJECT_DIR$/.idea/modules/Downloads.World-Now.iml" />
+      <module fileurl="file://$PROJECT_DIR$/World-Now.iml" filepath="$PROJECT_DIR$/World-Now.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/World-Now.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/World-Now.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/World-Now.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/World-Now.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>
