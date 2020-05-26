@@ -51,6 +51,7 @@ This app makes use of The Guardian - Open Platform to display the news. In order
   module [build.gradle(app)](app/build.gradle) file;
 
 ### Guidelines
+* Download and use [SquareAndroid](https://github.com/square/java-code-styles) code style.
 * Create an issue or comment on an existing one. Wait until it is assigned to you.
 * Add your name to the Contributors.MD file in format
 ```
