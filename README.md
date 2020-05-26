@@ -4,13 +4,18 @@
 [![Build Status](https://travis-ci.org/nikhilbansal97/World-Now.svg?branch=master)](https://travis-ci.org/nikhilbansal97/World-Now)
 ![License](https://img.shields.io/badge/license-Apache-orange.svg)
 
-This is a news app make purely in Kotlin and uses the Architecture Components, Dagger2 and RxJava
+Open Source News app for practice and any new people looking to contribute!
 
-![World Now Screenshot](https://media.giphy.com/media/5tmsrWiWlQR6MlyjZS/giphy.gif)
+### Libraries used
+* ![Architecture Components(ViewModel, LiveData etc.)](https://developer.android.com/topic/libraries/architecture)
+* ![Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
+* ![Dagger Andrid](https://dagger.dev/dev-guide/android.html)
+* ![Retrofit](https://square.github.io/retrofit/)
+* ![Realm Database](https://realm.io/docs/kotlin/latest/)
 
-## Dagger-Android & RxJava
+## Project Structure
 
-The app is built using `dagger.android` and `RxJava`. Below is the brief about the packages in the app:
+The app is built using `dagger.android` and `Coroutines`. Below is the brief about the packages in the app:
   * `di` : This package contains all the files related to dependency injection
     * `component` : It contains the `AppComponent` that is responsible for generating all the code for injection and connecting the modules to injections.
     * `module` : It contains the Modules that provide the dependencies needed by the app.
