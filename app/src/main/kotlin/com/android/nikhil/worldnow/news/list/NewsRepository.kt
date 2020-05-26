@@ -5,8 +5,10 @@ import com.android.nikhil.worldnow.BuildConfig
 import com.android.nikhil.worldnow.model.Result
 import com.android.nikhil.worldnow.service.NewsService
 import io.realm.Realm
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /*
@@ -34,11 +36,11 @@ class NewsRepository @Inject constructor(private val newsService: NewsService) {
   */
   private suspend fun getNewsFromDb(): ArrayList<Result> {
     val results = ArrayList<Result>()
-    coroutineScope {
+    withContext(Dispatchers.IO) {
       realm.beginTransaction()
       val realmResults = realm.where(Result::class.java)
           .findAll()
-      realmResults.filter { it != null }
+      realmResults.filterNotNull()
           .forEach { results.add(it) }
       realm.commitTransaction()
     }
@@ -49,7 +51,7 @@ class NewsRepository @Inject constructor(private val newsService: NewsService) {
   * Save the news in the Realm database
   */
   private suspend fun saveNewsInDb(newsList: ArrayList<Result>) {
-    coroutineScope {
+    withContext(Dispatchers.IO) {
       val realm = Realm.getDefaultInstance()
       realm.beginTransaction()
       realm.insert(newsList)
@@ -61,8 +63,8 @@ class NewsRepository @Inject constructor(private val newsService: NewsService) {
   * Get the news from the server
   */
   private suspend fun getNewsFromServer() {
-    coroutineScope {
-      val news = newsService.getNews(BuildConfig.ApiKey)
+    withContext(Dispatchers.IO) {
+      val news = newsService.getNews("BuildConfig.ApiKey")
           .await()
       processNews(news.response?.results)
     }
