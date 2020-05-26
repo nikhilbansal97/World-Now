@@ -22,10 +22,10 @@ class ServiceModule {
   @Singleton
   fun getRetrofit(): Retrofit {
     return Retrofit.Builder()
-        .baseUrl("https://content.guardianapis.com")
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
-        .build()
+      .baseUrl("https://content.guardianapis.com")
+      .addConverterFactory(GsonConverterFactory.create())
+      .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
+      .build()
   }
 
   @Provides
@@ -34,15 +34,15 @@ class ServiceModule {
     interceptor: HttpLoggingInterceptor
   ): OkHttpClient {
     return OkHttpClient.Builder()
-        .addInterceptor(interceptor)
-        .build()
+      .addInterceptor(interceptor)
+      .build()
   }
 
   @Provides
   @Singleton
   fun getLoggingInterceptor(): HttpLoggingInterceptor {
     return HttpLoggingInterceptor()
-        .setLevel(BODY)
+      .setLevel(BODY)
   }
 
   @Provides
@@ -54,8 +54,8 @@ class ServiceModule {
   @Provides
   fun getRealmObject(): Realm {
     val configuration = RealmConfiguration.Builder()
-        .name(realm_filename)
-        .build()
+      .name(realm_filename)
+      .build()
     return Realm.getInstance(configuration)
   }
 

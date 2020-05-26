@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NewsViewModal @Inject constructor(private val newsRepository: NewsRepository) :
-    BaseViewModel() {
+  BaseViewModel() {
 
   private var error = MutableLiveData<Boolean>()
   private var newsLiveData = MutableLiveData<List<Result>>()

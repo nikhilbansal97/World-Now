@@ -1,7 +1,6 @@
 package com.android.nikhil.worldnow.news.list
 
 import android.arch.lifecycle.MutableLiveData
-import com.android.nikhil.worldnow.BuildConfig
 import com.android.nikhil.worldnow.model.Result
 import com.android.nikhil.worldnow.service.NewsService
 import io.realm.Realm
@@ -39,9 +38,9 @@ class NewsRepository @Inject constructor(private val newsService: NewsService) {
     withContext(Dispatchers.IO) {
       realm.beginTransaction()
       val realmResults = realm.where(Result::class.java)
-          .findAll()
+        .findAll()
       realmResults.filterNotNull()
-          .forEach { results.add(it) }
+        .forEach { results.add(it) }
       realm.commitTransaction()
     }
     return results
@@ -65,7 +64,7 @@ class NewsRepository @Inject constructor(private val newsService: NewsService) {
   private suspend fun getNewsFromServer() {
     withContext(Dispatchers.IO) {
       val news = newsService.getNews("BuildConfig.ApiKey")
-          .await()
+        .await()
       processNews(news.response?.results)
     }
   }

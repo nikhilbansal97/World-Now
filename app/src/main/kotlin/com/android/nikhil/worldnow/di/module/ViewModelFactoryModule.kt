@@ -23,8 +23,10 @@ abstract class ViewModelFactoryModule {
 
 }
 
-class ViewModelFactory @Inject constructor(val viewModels: Map<Class<out ViewModel>,@JvmSuppressWildcards Provider<ViewModel>>) :
-    ViewModelProvider.Factory {
+class ViewModelFactory @Inject constructor(
+  val viewModels: Map<Class<out ViewModel>,
+    @JvmSuppressWildcards Provider<ViewModel>>
+) : ViewModelProvider.Factory {
   override fun <T : ViewModel?> create(modelClass: Class<T>): T = viewModels[modelClass]?.get() as T
 
 }

@@ -12,12 +12,14 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-  AndroidSupportInjectionModule::class,
-  ServiceModule::class,
-  ViewModelFactoryModule::class,
-  ActivityBindingModule::class
-])
+@Component(
+  modules = [
+    AndroidSupportInjectionModule::class,
+    ServiceModule::class,
+    ViewModelFactoryModule::class,
+    ActivityBindingModule::class
+  ]
+)
 interface AppComponent : AndroidInjector<NewsApplication> {
 
   @Component.Builder

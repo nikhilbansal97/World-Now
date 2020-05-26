@@ -5,12 +5,12 @@ import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import io.realm.Realm
 
-class NewsApplication: DaggerApplication() {
+class NewsApplication : DaggerApplication() {
 
   override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
     return DaggerAppComponent.builder()
-              .context(this)
-              .build()
+      .context(this)
+      .build()
   }
 
   override fun onCreate() {

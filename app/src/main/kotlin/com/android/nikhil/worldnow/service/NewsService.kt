@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface NewsService {
 
-    @GET("search")
-    fun getNews(@Query("api-key") apiKey: String): Deferred<NewsResponse>
+  @GET("search")
+  fun getNews(@Query("api-key") apiKey: String): Deferred<NewsResponse>
 
 }
